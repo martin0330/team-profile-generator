@@ -2,18 +2,20 @@
 // generate html file nicely formatted 
 // when i click their email then my default email program opens
 // when i click on github then that github profile pops up
-const generatePage = require('./src/generatePage.js')
+const createPage = require('./src/generatePage.js');
+const generatePage = require('./');
 
-const Manager = require('./lib/Manager')
-const Engineer = require('./lib/Engineer')
-const Intern = require('./lib/Intern')
-const teamArray = []
+const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const teamArray = [];
 
-const fs = require('fs')
-const inquirer = require('inquirer')
+const fs = require('fs');
+const inquirer = require('inquirer');
 
 const askManager = () => {
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             name: 'name',
             type: 'input',
@@ -67,32 +69,36 @@ const askManager = () => {
             }
         },
     ])
-    .then(managerInput => {
-        const { name, id, email, officeNumber } = managerInput;
-        const manager = new Manager (name, id, email, officeNumber);
+        .then(managerInput => {
+            const { name, id, email, officeNumber } = managerInput;
+            const manager = new Manager(name, id, email, officeNumber);
 
-        teamArray.push(manager);
-        console.log(manager);
-    })
-        .then(answers => {
-            mainMenu();
+            teamArray.push(manager);
+            console.log(manager);
         })
-    }
+
+        .then(answers => {
+                mainMenu();
+            })
+        }
+
+
+
 
 const mainMenu = () => {
     inquirer.prompt([
         {
             name: 'choice',
             type: 'list',
-            message: 'What would you like to do next?',
-            choices: ['Add Engineer', 'Add Intern', 'Finished'],
+            message: 'Would you like to add an Engineer or Intern?',
+            choices: ['Engineer', 'Intern', 'Finished'],
         },
     ])
 
         .then(answer => {
-            if (answer.choice === 'Add Engineer') {
+            if (answer.choice === 'Engineer') {
                 askEngineer();
-            } else if (answer.choice === 'Add Intern') {
+            } else if (answer.choice === 'Intern') {
                 askIntern();
             } else {
                 return writeFile(teamArray);
@@ -156,13 +162,13 @@ const askEngineer = () => {
             }
         },
     ])
-    .then(engineerInput => {
-        const { name, id, email, github } = engineerInput;
-        const engineer = new Engineer (name, id, email, github);
+        .then(engineerInput => {
+            const { name, id, email, github } = engineerInput;
+            const engineer = new Engineer(name, id, email, github);
 
-        teamArray.push(engineer);
-        console.log(engineer);
-    })
+            teamArray.push(engineer);
+            console.log(engineer);
+        })
         .then(answers => {
             mainMenu();
         })
@@ -223,12 +229,12 @@ const askIntern = () => {
         },
     ])
         .then(internInput => {
-        const { name, id, email, school } = internInput;
-        const intern = new Intern (name, id, email, school);
+            const { name, id, email, school } = internInput;
+            const intern = new Intern(name, id, email, school);
 
-        teamArray.push(intern);
-        console.log(intern);
-    })
+            teamArray.push(intern);
+            console.log(intern);
+        })
         .then(answers => {
             mainMenu();
         })
@@ -248,16 +254,20 @@ const writeFile = data => {
 
 
 askManager()
-    // .then()
-    // .then(teamArray => {
-    //     return generatePage(teamArray);
-    // })
-    // .then(pageHTML => {
-    //     return writeFile(pageHTML);
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    // })
+// .then(teamArray => {
 
-
+//     fs.writeFile('./dist/index.html', createPage(teamArray), err => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         console.log('Created team page')
+//         fs.copyFile('./src/style.css', './dist/style.css', err => {
+//             if (err) {
+//                 console.log(err);
+//                 return;
+//             }
+//         })
+//     })
+// })
 
