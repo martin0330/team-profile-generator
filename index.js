@@ -3,7 +3,6 @@
 // when i click their email then my default email program opens
 // when i click on github then that github profile pops up
 const createPage = require('./src/generatePage.js');
-const generatePage = require('./');
 
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
@@ -101,7 +100,7 @@ const mainMenu = () => {
             } else if (answer.choice === 'Intern') {
                 askIntern();
             } else {
-                return writeFile(teamArray);
+                return fs.writeFileSync("./dist/index.html", createPage(teamArray));
             }
         })
 }
@@ -254,6 +253,17 @@ const writeFile = data => {
 
 
 askManager()
+
+
+
+
+
+
+
+
+
+
+
 // .then(teamArray => {
 
 //     fs.writeFile('./dist/index.html', createPage(teamArray), err => {
