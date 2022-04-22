@@ -34,7 +34,7 @@
   
   
 
+Uploading Untitled_ Apr 22, 2022 2_27 PM.mp4…
 
-https://user-images.githubusercontent.com/95774102/164781061-2edcab3a-8b3b-4510-8430-42fc540d7ee3.mp4
 
 https://drive.google.com/file/d/1LXd5gQ2xE5hc7H7dTGsdsBn9AHOnWnw1/view
